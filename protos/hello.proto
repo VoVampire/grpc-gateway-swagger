@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package hello;
+
+import "google/api/annotations.proto";
+
+// Hello服务
+service HelloService {
+    // SayHello接口
+    rpc SayHello (SayHelloRequest) returns (SayHelloResponse) {
+        option (google.api.http) = {post:"/v1/examples/say_hello" body:"*"};
+    }
+    // SayGoodbye接口
+    rpc SayGoodbye (SayGoodbyeRequest) returns (SayGoodbyeResponse) {
+        option (google.api.http) = {post:"/v1/examples/say_goodbye" body:"*"};
+    }
+}
+
+// SayHello请求
+message SayHelloRequest {
+    // 姓名
+    string name = 1;
+}
+// SayHello响应
+message SayHelloResponse {
+    // 返回信息
+    string message = 1;
+}
+
+// SayGoodbye请求
+message SayGoodbyeRequest {
+    // 姓名
+    string name = 1;
+}
+// SayGoodbye响应
+message SayGoodbyeResponse {
+    // 返回信息
+    string message = 1;
+}
