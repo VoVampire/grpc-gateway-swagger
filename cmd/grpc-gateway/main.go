@@ -4,34 +4,30 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	assetfs "github.com/elazarl/go-bindata-assetfs"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"google.golang.org/grpc"
 	hello "grpc-gateway-swagger/protos"
-	"grpc-gateway-swagger/swagger"
 	"log"
 	"net/http"
+	"path"
 )
 
 var (
-	grpcServerGateway  = flag.String("grpc-server-gateway", ":8081", "gRPC server gateway")
-	grpcServerEndpoint = flag.String("grpc-server-endpoint", "localhost:9090", "gRPC server endpoint")
+	grpcServerGateway     = flag.String("grpc-server-gateway", ":8081", "gRPC server gateway")
+	grpcServerEndpoint    = flag.String("grpc-server-endpoint", "localhost:9090", "gRPC server endpoint")
+	swaggerFileServerPath = flag.String("swagger-file-server-path", "/home/qydev/go/src/grpc-gateway-swagger/swagger/", "swagger file server path")
 )
 
 func serveSwaggerJson(mux *http.ServeMux) {
-	fileServer := http.FileServer(http.Dir("/home/qydev/"))
-	prefix := "/swagger.json/"
-	mux.Handle(prefix, http.StripPrefix(prefix, fileServer))
+	prefix := "/swagger-json/"
+	p := path.Join(*swaggerFileServerPath, "swagger-json")
+	mux.Handle(prefix, http.StripPrefix(prefix, http.FileServer(http.Dir(p))))
 }
 
 func serveSwaggerUI(mux *http.ServeMux) {
-	fileServer := http.FileServer(&assetfs.AssetFS{
-		Asset:    swagger.Asset,
-		AssetDir: swagger.AssetDir,
-		Prefix:   "/home/qydev/go/src/grpc-gateway-swagger/swagger/swagger-ui",
-	})
 	prefix := "/swagger-ui/"
-	mux.Handle(prefix, http.StripPrefix(prefix, fileServer))
+	p := path.Join(*swaggerFileServerPath, "swagger-ui")
+	mux.Handle(prefix, http.StripPrefix(prefix, http.FileServer(http.Dir(p))))
 }
 
 func run() error {
