@@ -1,6 +1,6 @@
 PROTOCHEAD=protoc -I/usr/local/include -I. -I${GOPATH}/src -I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis
 
-all: proto gw swagger
+all: proto gw swag
 
 proto:
 	@$(PROTOCHEAD) --go_out=plugins=grpc:. ./protos/*.proto
@@ -8,5 +8,5 @@ proto:
 gw:
 	@$(PROTOCHEAD) --grpc-gateway_out=logtostderr=true:. ./protos/*.proto
 
-swagger:
+swag:
 	@$(PROTOCHEAD) --swagger_out=logtostderr=true:. ./protos/*.proto
