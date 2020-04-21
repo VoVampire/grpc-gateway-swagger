@@ -5,7 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"google.golang.org/grpc"
-	hello "grpc-gateway-swagger/protos"
+	hello "grpc-swagger/protos"
 	"log"
 	"net"
 )

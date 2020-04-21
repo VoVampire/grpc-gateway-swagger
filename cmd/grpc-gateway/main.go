@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"google.golang.org/grpc"
-	hello "grpc-gateway-swagger/protos"
+	hello "grpc-swagger/protos"
 	"log"
 	"net/http"
 	"path"
@@ -15,7 +15,7 @@ import (
 var (
 	grpcServerGateway     = flag.String("grpc-server-gateway", ":8081", "gRPC server gateway")
 	grpcServerEndpoint    = flag.String("grpc-server-endpoint", "localhost:9090", "gRPC server endpoint")
-	swaggerFileServerPath = flag.String("swagger-file-server-path", "/home/qydev/go/src/grpc-gateway-swagger/swagger/", "swagger file server path")
+	swaggerFileServerPath = flag.String("swagger-file-server-path", "/home/qydev/go/src/grpc-swagger/swagger/", "swagger file server path")
 )
 
 func serveSwaggerJson(mux *http.ServeMux) {

@@ -1,1 +1,1 @@
-# grpc-gateway-swagger
+# grpc-swagger

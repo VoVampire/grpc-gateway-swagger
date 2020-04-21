@@ -6,7 +6,7 @@ import (
 	"flag"
 	"google.golang.org/grpc"
 	"gopkg.in/resty.v1"
-	hello "grpc-gateway-swagger/protos"
+	hello "grpc-swagger/protos"
 	"log"
 )
 
